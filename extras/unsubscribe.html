@@ -1,0 +1,15 @@
+<html>
+	<head>
+	</head>
+	<body>
+		<noscript>Por favor, habilite o javascript para acessar esta página!</noscript>
+		<script language="javascript">
+			var uid = window.location.href.indexOf("uid=");
+			if(uid != -1){
+				window.location.href = "/r.html?uid=" + window.location.href.substr(uid+4);
+			}else{
+				window.location.href = "/erroForm.html";
+			}
+		</script>
+	</body>
+</html>
