@@ -1,0 +1,230 @@
+==========================================================================================================
+										INSTALAÇÃO DAS DEPENDÊNCIAS
+==========================================================================================================
+* As dependências estão na pasta dependencias. Porém, antes de usar os instaladores verifique se não há
+  uma versão mais atualizada disponível!
+  
+										++++++++++ 1 - MYSQL +++++++++
+	1.1 - Baixe a última versão do MYSQL 5.x Community Server (http://dev.mysql.com/downloads/mysql) e
+		execute o instalador
+		
+	1.2 - No tipo de instalação, escolha "Customizada". Então, instale:
+		MySQL Server
+		MySQL Workbench
+		
+	1.3 - Ao término da instalação, configure o MYSQL SERVER de acordo com cada caso. Guarde a senha admin
+		pois será usada em muitos casos. Lembre-se de configurar o MYSQL SERVER como um serviço do windows
+		
+	1.4 - Após a instalação, abra o MYSQL Workbench e altere o datadir e o caminho para os arquivos de log
+		de acordo com a necessidade.
+	Obs: Não esqueça de adicionar o usuário "NETWORK SERVICE" com permissão de escrita às novas pastas
+		
+										++++++++++ 2 - PYTHON +++++++++
+	2.1 - Baixe a última versão do Python 2.x (https://www.python.org/downloads/) e
+		execute o instalador
+		
+	2.2 - Adicione o caminho do python à variável Path do sistema. Para isso, digite o seguinte caminho
+		no explorer:
+			Painel de Controle\Sistema e Segurança\Sistema
+			ou em, inglês:
+			Control Panel\All Control Panel Items\System
+	
+	2.3 - Clique em "Configurações avançadas do sistema" e em seguida "Variáveis de ambiente". Em varáveis 
+	do sistema, selecione a variável Path e clique em editar.
+	
+	2.4 - Clique em novo e adicione os caminhos do Python, de acordo com sua instalação. Exemplo:
+			C:\Python27\
+			C:\Python27\Scripts
+	
+							++++++++++ 3 - MySQL connector para Python +++++++++
+	3.1 - Baixe a última versão do Connector MYSQL para Python 2.x (http://www.codegood.com/downloads) e
+		execute o instalador
+	Obs: A versão deve ser a mesma da versão do python baixada
+	
+	
+							++++++++++ 4 - PYTHON - EXTENSÃO WIN32 +++++++++
+	4.1 - Baixe a última versão do Python for Windows Extensions 2.x (https://sourceforge.net/projects/pywin32/) e
+		execute o instalador
+	Obs: A versão deve ser a mesma da versão do python baixada
+	
+	
+								++++++++++ 5 - PYTHON - BEAUTIFUL SOUP 4 +++++++++
+	5.1 - Baixe a última versão do Python Beautiful Soup 4 (https://www.crummy.com/software/BeautifulSoup/) e
+		extraia o arquivo em C:\
+	5.2 - Abra o prompt de comando na pasta do Beautiful Soup 4 extraida e execute o comando
+			setup.py install
+	5.3 - Remova a pasta extraida, pois ela não é mais necessária
+		
+							++++++++++ 6 - Java SE Development Kit 8 (JDK) +++++++++
+	6.1 - Baixe a última versão do Java JDK 8 (http://www.oracle.com/technetwork/java/javase/downloads/)
+		e execute o instalador
+		
+								++++++++++ 7 - TOMCAT 8 +++++++++
+	7.1 - Baixe a última versão do TOMCAT 8 (http://tomcat.apache.org/download-80.cgi) e descompacte
+		  em C: ou na pasta de sua preferência
+	Obs: NÃO baixe a versão Windows Service Installer (.exe), pois a mesma não inclui alguns scripts 
+		 exigidos pelo OpenEMM. Baixe a versão .zip
+	7.2 - Abra o arquivo RUNNING e siga as instruções para configurar o TOMCAT 8. Basicamente:
+		Configurar variável CATALINA_HOME
+		Configurar variável JRE_HOME
+	7.3 - Altere a porta 8080 para 80 no arquivo conf/server.xml
+		 (Connector port="8080" para Connector port="80")
+	
+	
+==========================================================================================================
+										INSTALAÇÃO DO OPENEMM
+==========================================================================================================
+* Durante este processo, iremos assumir que a instalação do OpemEMM será realizada em C:\OpenEMM
+
+* Na pasta fontes temos o OpenEMM-2015_R2 com as correções de bugs aplicadas até 06/2016
+
+	1 - Descompacte o arquivo OpenEMM-2015_R2-win32.zip em C:
+	
+	2 - Copie os arquivos da pasta pt-br/bd para C:\OpenEMM\USR_SHARE, substituindo os existentes
+	
+	3 - Edite os arquivos copiados, substituindo toda ocorrência do fragmento de url 
+		http://localhost:8080 pelo fragmento equivalente à URL de instalação do sistema
+		Ex: http://news.suaorganizacao.com
+		
+	4 - Copie a pasta pt-br/manual/pt para o caminho C:\OpenEMM\webapps\manual
+		para habilitar o manual na interface pt
+	
+	5 - Copie o arquivo pt-br/messages/datepicker.js para C:\OpenEMM\webapps\openemm\js\lib\datepicker
+		substituindo o anterior
+		
+	6 - Copie os arquivos displaytag_pt, cmsmessages_pt e messages_pt para
+		C:\OpenEMM\webapps\openemm\WEB-INF\classes
+		substituindo os anteriores
+		
+	7 - Baixe a última versão do CKEDITOR no site http://ckeditor.com e extraia o arquivo baixado na pasta
+		C:\OpenEMM\webapps\openemm
+
+	8 - Renomeie a pasta gerada de acordo com a versão do ckeditor. Para este guia, usaremos a última versão 
+		disponível em 06/2016: ckeditor-4.5.9
+
+	9 - Copie os arquivos da pasta ckeditorDep para a pasta ckeditor-4.5.9. Atenção para a subpasta 'plugins'
+		na qual deve ser adicionada o plugin emm
+
+	10 - Revise as configurações do arquivo ckeditor-4.5.9\emm_config.js
+
+	11 - Altere a propriedade ckpath do arquivo C:\OpenEMM\webapps\openemm\WEB-INF\classes\emm.properties
+		 para ckeditor-4.5.9
+		
+	12 - Altere a propriedade cms.ccr.ur do arquivo C:\OpenEMM\webapps\openemm\WEB-INF\classes\cms.properties
+		 de acordo com a URL de instalação do sistema
+	
+	13 - No arquivo C:\OpenEMM\webapps\openemm\WEB-INF\classes\emm.properties:
+			* Altere a propriedade system.url de acordo com a URL de instalação
+			* Altere a propriedade system.mail.host, informando o servidor que será usado para o envio de e-mails,
+			  Ex: correio.openemm.com.br:25
+			* Altere a propriedade mailgun.ini.domain, de acordo com o seu domínio
+			  Ex: openemm.com.br
+			* Altere as demais propriedades seguindo as instruções do arquivo. Não esqueça de informar o endereço
+			  de e-mail para envio de relatórios de erro e outras configurações (Propriedades com valor openemm@localhost)
+			* Altere a propriedade mailgun.ini.default_charset, conforme abaixo:
+				mailgun.ini.default_charset=UTF-8
+			  
+	14 - Substitua o arquivo C:\OpenEMM\webapps\openemm-ws\WEB-INF\classes\emm.properties pelo arquivo 
+		C:\OpenEMM\webapps\openemm\WEB-INF\classes\emm.properties
+			  
+	15 - Altere a propriedade wsdlLocationUri do arquivo C:\OpenEMM\webapps\openemm-ws\WEB-INF\classes\emm-ws.properties
+		de acordo com a URL de instalação do sistema (Siga o modelo da URL de exemplo, setada na propriedade)
+		
+	16 - Copie o arquivo extras\openemmService.py para C:\OpenEMM\bin
+	
+	17 - Copie a pasta extras\semu para C:\OpenEMM\conf, substituindo os arquivos existentes
+	
+	18 - Copie o arquivo extras\unsubscribe.html para C:\OpenEMM\webapps\openemm
+	
+	19 - No arquivo C:\OpenEMM\conf\semu\semu.cfg, configure a uri para o [listUnsubscribeHeader], informando
+		 o caminho de acordo com sua instalação
+			IMPORTANTE: Para esta funcionalidade funcionar corretamente, você deve colocar o id 'linkUnsubscribe' no link
+			de unsubscribe. Caso contrário, nenhuma ação será realizada pelo plugin!
+
+		
+==========================================================================================================
+										CONFIGURAÇÃO (PRIMEIRA EXECUÇÃO)
+==========================================================================================================
+* Se você deseja utilizar um banco remoto, siga as instruções "CONFIGURANDO BANCO REMOTO" ANTES de executar
+os passos a seguir!
+
+
+	+++++ APENAS BANCO LOCAL +++++
+	1 - Se o banco ficará no mesmo servidor, execute o script "setup.bat", presente na raiz de instalação
+		do OpenEMM
+	
+	+++++ APENAS BANCO LOCAL +++++
+	2 - Informe a senha root do mysql (4 vezes), para criar os bancos.
+	
+	* Se você configurou banco remoto, execute o script "config.bat", presente na raiz de instalação do
+		OpenEMM
+	
+	3 - Informe a URL de acesso ao sistema. Ex: http://news.openemm.com.br
+		(Não esqueça do http:// e nem da porta, se não for a padrão 80)
+	
+	4 - Informe o mailloop domain. Ex: openemm.com.br
+	
+	5 - Opcionalmente, informe o smart mail relay (um servidor dedicado que envia todos os e-mails,
+		seu servidor ISP) na forma: 'usuario:senha@servidor:porta'. Se seu servidor não necessita de
+		autenticação, basta não informar usuário e senha. Ex: correio.openemm.com.br
+		
+	6 - Para alterar a porta padrão 8080 para a porta 80, basta editar o arquivo C:\OpenEMM\conf\server.xml
+		e alterar a linha (Connector port="8080" para Connector port="80")
+		
+	7 - Para testar se está tudo correto, execute o script "start.bat" e acesse a URL configurada no
+		item 3. Acesse o link http://<URL_ITEM_3>/logon.do e entre com o usuário admin
+		e senha openemm.
+		
+	8 - Entre em Administração -> Plugins e ative os plugins disponíveis
+		
+	9 - Para finalizar a aplicação, basta pressionar a tecla 'enter' dentro do prompt do script "start.bat"
+		executado no item 7
+		
+	* Para detalhes de como funciona a aplicação e realizar testes de envio de email, consulte o manual
+	  da aplicação, na pasta C:\OpenEMM\webapps\manual\pt\pdf\manual_pdf_en.pdf
+	  
+	10 - Para ambiente de produção, instale o serviço do OpenEMM seguindo "CRIANDO SERVIÇO PARA O OPENEMM"
+	
+	
+			
+	  
+	  
+==========================================================================================================
+										CONFIGURANDO BANCO REMOTO
+==========================================================================================================
+	
+	
+	
+==========================================================================================================
+									CRIANDO SERVIÇO PARA O OPENEMM
+==========================================================================================================
+	* Antes de instalar o serviço, certifique-se de que o sistema está funcionando corretamente!
+	
+	
+	1 - A inicialização da aplicação pelo passo 7 do item CONFIGURAÇÃO (PRIMEIRA EXECUÇÃO) é apenas para 
+		fins de testes. Em um ambiente de produção você deve configurar um serviço do windows para gerenciar
+		a aplicação. Antes disso, remova todas as pastas temporárias para evitar problemas de permissão 
+		negada. A saber:
+			- Pasta work
+			- Pasta webapps-empty
+			- Todo o conteúdo da pasta log
+			- Todo o conteúdo da pasta /var/lock
+			- Todo o conteúdo da pasta /var/log
+			- Todo o conteúdo da pasta /var/run
+			- Pasta /var/tmp
+			- Conteúdo das pastas internas à pasta /var/spool
+
+	2 - Para instalar o serviço, execute o seguinte comando no prompt (cmd) do windows como administrador:
+			python C:\OpenEMM\bin\openemmService.py --startup=auto install
+			
+	3 - Se deu tudo certo (serviço instalado), você poderá iniciar o OpenEMM acessando a tela de serviços 
+		do windows (services.msc), podendo iniciar, finalizar ou reiniciar o OpenEMM. O nome do serviço é
+		"OpemEMM Service"
+		
+	4 - Caso queira desinstalar o serviço do OpenEMM, basta executar o comando abaixo no cmd:
+		python C:\OpenEMM\bin\openemmService.py remove
+		
+	* Caso ocorra algum erro, ao iniciar ou parar o serviço, verique o log do serviço, em
+	  C:\OpenEMM\logs\openEMMService.log ou o registro de erros do windows (Event Viewer)
+	  
+	
